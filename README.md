@@ -43,7 +43,13 @@ Slutresultat/Analys/Diskussion
 
 LOG
 ---
-- 2014-10-05 15:13
-Idag har jag skapat mitt projekt och städat upp lite i EvenWindow-klassen som jag fick av Stefan.
-Problemet just nu är att klasserna endast är skapade och ej fungerande.
+- 2014-10-15 15:13
+Idag har jag skapat mitt projekt och städat upp lite i EvenWindow-klassen som 
+jag fick av Stefan. Problemet just nu är att klasserna endast är skapade och ej fungerande.
 Nästa gång ska jag försöka lägga till lite innehåll i subklasserna.
+
+- 2014-10-17 15:06
+Idag har jag försökt lägga till en sub-klass vid namn JumpingHorse och även 
+städa upp lite i den abstrakta klassen. Just nu kan jag inte få mitt GUI att 
+fungera och det ska jag fortsätta med nästa gång så att jag kan få börja se lite
+framsteg medan de händer. Än så länge ser jag bara text på en skärm.

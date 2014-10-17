@@ -1,4 +1,4 @@
-public Subclass2{
+public class Subclass2{
 
 
-{
+}
