@@ -40,3 +40,10 @@ Slutresultat/Analys/Diskussion
 - Buggar
 - Förbättringar
 - Övrigt
+
+LOG
+---
+- 2014-10-05 15:13
+Idag har jag skapat mitt projekt och städat upp lite i EvenWindow-klassen som jag fick av Stefan.
+Problemet just nu är att klasserna endast är skapade och ej fungerande.
+Nästa gång ska jag försöka lägga till lite innehåll i subklasserna.
