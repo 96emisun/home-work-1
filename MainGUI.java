@@ -1,148 +1,350 @@
-
-import java.awt.BorderLayout;
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import javax.swing.*;
 
-public class MainGUI extends JFrame {
+public class MainGUI extends JFrame{
+
+    private JMenuBar meny;
+    private JMenu arkiv;
+    private JMenu om;
+    private JMenuItem avsluta;
+    private JMenuItem omSkaparen;
+    private JMenuItem hjalp;
     
-    /*
-        GUI-komponenter
-    */
+    private JButton starta;
     
-    private Dimension dimFrame, dimButton, dimTXF;
+    protected Point pen;
+    protected Point mouse;
     
-    private JMenuBar menu;
-    private JMenu archive;
-    private JMenuItem terminate;
-    
-    private JTabbedPane jtp;
-    private JPanel pteacher, pstudent, pclass;
-    private JTextField txfTeacher, txfStudent;
-    private JTextArea txaClass;
-    private JButton btnAddTeacher, btnAddStudent, btnPrintClass;
-    private JLabel lblTeacher, lblStudent, lblPrint;
-    
-    /*
-        Modell variabler
-    */
-    
-    private Modelclass Model;
-    
-    public MainGUI (){
-        this.initGUI();
-        this.Model = new Modelclass();
-    }
-    
-    
-    
-    
-    
-    /*
-        Inställningar för JFramen
-    */
-    private void initGUI(){
-        /*
-            Standard storlekar för GUI-komponenterna
-        */
+    private DrawJPanel panel;
+    private Dimension btnDimension;
+
+
+    public MainGUI(){
         
-        this.dimFrame = new Dimension(300, 400);
-        this.dimTXF = new Dimension(125, 50);
-        this.dimButton = new Dimension(125, 30);
+        panel = new DrawJPanel();
+        add(panel);
         
-        this.setTitle("Klasslista");
-        this.setSize( dimFrame );
+        this.btnDimension = new Dimension(125, 30);
+        
+        this.setTitle("DrawingGUI");
+        this.setSize( 600, 600 );
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        /*
+        this.pen = new Point(0, 0);
+        this.mouse = new Point(0, 0);
+        
+         /*
             Skapar menyerna
         */
+        this.meny = new JMenuBar();
+        this.arkiv = new JMenu("Arkiv");
+        this.om = new JMenu("Om");
+        this.avsluta = new JMenuItem("Avsluta programmet");
+        this.omSkaparen = new JMenuItem("Om skaparen");
+        this.hjalp = new JMenuItem("Hjälp");
         
-        this.menu = new JMenuBar();
-        this.archive = new JMenu("Arkiv");
-        this.terminate = new JMenuItem("Avsluta programmet");
+        this.starta = new JButton("Starta");
+        this.starta.setPreferredSize(btnDimension);
         
-        this.setJMenuBar(menu);
-        this.menu.add(archive);
-        this.archive.add(terminate);
+        this.setJMenuBar(meny);
+        this.meny.add(arkiv);
+        this.meny.add(om);
+        this.arkiv.add(avsluta);
+        this.om.add(omSkaparen);
+        this.om.add(hjalp);
         
-        this.terminate.addActionListener(new ActionListener(){
+        this.add(starta);
+        
+        this.avsluta.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 System.exit(0);
             }
         });
         
-        /*
-            Flikarna skapas
-        */
-        this.jtp = new JTabbedPane();
-        this.add(jtp);
+        this.omSkaparen.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                JOptionPane.showMessageDialog(null, 
+                        "Copyright: Emil Sundqvist\nSkapat för en inlämningsuppgift");
+            }
+        });
         
-        this.pclass = new JPanel();
-        this.pstudent = new JPanel();
-        this.pteacher = new JPanel();
+        this.hjalp.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                JOptionPane.showMessageDialog(null, 
+                        "HJÄLP!!!");
+            }
+        });
         
-        this.jtp.addTab("Student", pstudent);
-        this.jtp.addTab("Teacher", pteacher);
-        this.jtp.addTab("Class", pclass);
-        
-        /*
-            Teacher-fliken FlowLayout manager
-        */
-        this.lblTeacher = new JLabel("Teacher to add");
-        this.txfTeacher = new JTextField();
-        this.txfTeacher.setPreferredSize(dimTXF);
-        
-        this.pteacher.add(this.lblTeacher);
-        this.pteacher.add(this.txfTeacher);
-        this.pteacher.add(this.btnAddTeacher);
-        
-        /*
-            Student-fliken FlowLayout manager
-        */
-        this.lblStudent = new JLabel("Student to add");
-        this.txfStudent = new JTextField();
-        this.txfStudent.setPreferredSize(dimTXF);
-        
-        this.pstudent.add(this.lblStudent);
-        this.pstudent.add(this.txfStudent);
-        this.pstudent.add(this.btnAddStudent);
-        
-        /*
-            Klass-fliken BorderLayout
-        */
-        this.pclass.setLayout(new BorderLayout(10, 10));
-        this.lblPrint = new JLabel("Print Class");
-        this.txaClass = new JTextArea(10, 25);
-        this.txaClass.setEditable(false);
-        
-        this.pclass.add(this.lblPrint, BorderLayout.NORTH);
-        this.pclass.add(this.txaClass, BorderLayout.CENTER);
-        this.pclass.add(this.btnPrintClass, BorderLayout.SOUTH);
         
     }
+
     
+
+    /**
+     * Returns the pens current x-coordinate.
+     *
+     * @return The pens current x-coordinate.
+     */
+    public int getPenX() {
+        return (int) this.pen.getX();
+    }
+
+    /**
+     * Returns the pens current y-coordinate.
+     *
+     * @return The pens current y-coordinate.
+     */
+    public int getPenY() {
+        return (int) this.pen.getY();
+    }
+
+    /**
+     * Returns the mouse current x-coordinate.
+     *
+     * @return The mouse current x-coordinate.
+     */
+    public int getMouseX() {
+        return (int) this.mouse.getX();
+    }
+
+    /**
+     * Returns the mouse current y-coordinate.
+     *
+     * @return The mouse current y-coordinate.
+     */
+    public int getMouseY() {
+        return (int) this.mouse.getY();
+    }
+
+    /**
+     * Draws a line to the specified coordinates.
+     *
+     * @param x The specified x-coordinate.
+     * @param y The specified y-coordinate.
+     */
+    public void lineTo(int x, int y) {
+        this.panel.lineTo((int) this.pen.getX(),
+                (int) this.pen.getY(), x, y);
+        this.pen.move(x, y);
+    }
+
+    /**
+     * Changes the pen to the specified width.
+     *
+     * @param width The specified color.
+     */
+    public void setLineWidth(int width) {
+        this.panel.setLineWidth(width);
+    }
+
+    /**
+     * Changes the pen to the specified color.
+     *
+     * @param col The specified color.
+     */
+    public void setColor(Color col) {
+        this.panel.setColor(col);
+    }
+
+    /**
+     * Moves the pen to the specified coordinates.
+     *
+     * @param x The specified x-coordinate.
+     * @param y The specified y-coordinate.
+     */
+    public void moveTo(int x, int y) {
+        this.pen.move(x, y);
+    }
+
+    /**
+     * Draws a filled circle at the specified coordinates and radius.
+     *
+     * @param x The specified x-coordinate.
+     * @param y The specified y-coordinate.
+     * @param radius The specified radius of the circle.
+     */
+    public void drawCirc(int x, int y, int radius) {
+        this.panel.drawCircle(x, y, radius);
+        this.pen.move(x, y);
+    }
+
+    /**
+     * Draws a filled rectangle at the specified coordinates with the specified
+     * dimensions.
+     *
+     * @param x The specified x-coordinate.
+     * @param y The specified y-coordinate.
+     * @param a Width of the rectangle.
+     * @param b Height of the rectangle.
+     *
+     */
+    public void drawRect(int x, int y, int a, int b) {
+        this.panel.drawRect(x, y, a, b);
+        this.pen.move(x, y);
+    }
+
+    /**
+     * Draws an image at the specified coordinates.
+     * @param icon The icon.
+     * @param x X-coordinate for the image. 
+     * @param y Y-coordinate for the image.
+     */
+    public void drawImage(ImageIcon icon, int x, int y) {
+        panel.drawImage(icon, x, y);
+    }
+
+    /**
+     * Writes text unto the window at the specified coordinates.
+     *
+     * @param	str	String to write.
+     * @param	x	X-coordinate for the text.
+     * @param	y	Y-coordinate for the text.
+     */
+    public void drawString(String str, int x, int y) {
+        panel.write(str, x, y);
+    }
+
+    /**
+     * Causes the EventWindow to pause for the given time.
+     *
+     * @param millisec The specified time in milliseconds the EventWindow
+     * pauses.
+     */
+    public void delay(int millisec) {
+        try {
+            Thread.sleep(millisec);
+        } catch (InterruptedException e) {
+            System.out.print(
+                    "We have been interrupted");
+        }
+    }
+
+    /**
+     * Clears the EventWindow of any drawings.
+     *
+     */
+    public void clear() {
+        this.panel.clear();
+    }
+
+    /**
+     * Causes the EventWindow to wait for a mouse-click.
+     */
+    public void waitForMouse() {
+        this.mouse = null;
+        while (mouse == null) {
+            this.delay(50);
+        }
+    }
     
+    private class DrawJPanel extends JPanel {
+
+        protected Color col;
+        protected float strokeWidth;
+        protected BufferedImage im;
+
+        public DrawJPanel() {
+            super();
+
+            this.col = Color.BLACK;
+            this.im = new BufferedImage(600, 400,
+                    BufferedImage.TYPE_INT_RGB);
+
+            Graphics2D g2d = im.createGraphics();
+            g2d.setColor(Color.WHITE);
+            g2d.fillRect(0, 0, im.getWidth(null), im.getHeight(null));
+            g2d.dispose();
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(im, 0, 0, this);
+        }
+
+        public void lineTo(int x1, int y1, int x2, int y2) {
+            Graphics2D g2d = im.createGraphics();
+            BasicStroke bs = new BasicStroke(strokeWidth);
+            g2d.setStroke(bs);
+            g2d.setColor(col);
+            g2d.drawLine(x1, y1, x2, y2);
+            g2d.dispose();
+            this.repaint();
+        }
+
+        public void drawCircle(int x, int y, int radius) {
+            Graphics2D g2d = im.createGraphics();
+            BasicStroke bs = new BasicStroke(strokeWidth);
+            g2d.setStroke(bs);
+            g2d.setColor(col);
+            g2d.fillOval(x, y, radius, radius);
+            g2d.dispose();
+            this.repaint();
+        }
+
+        public void drawRect(int x, int y, int a, int b) {
+            Graphics2D g2d = im.createGraphics();
+            BasicStroke bs = new BasicStroke(strokeWidth);
+            g2d.setStroke(bs);
+            g2d.setColor(col);
+            g2d.fillRect(x, y, a, b);
+            g2d.dispose();
+            this.repaint();
+        }
+
+        public void write(String str, int x, int y) {
+            Graphics2D g2d = im.createGraphics();
+            g2d.setColor(col);
+            g2d.drawString(str, x, y);
+            g2d.dispose();
+            this.repaint();
+        }
+
+        public void drawImage(ImageIcon icon, int x, int y) {
+            Graphics2D g2d = im.createGraphics();
+            icon.paintIcon(this, g2d, x, y);
+            g2d.dispose();
+            this.repaint();
+        }
+
+        public void setLineWidth(int stroke) {
+            this.strokeWidth = stroke;
+        }
+
+        public void setColor(Color col) {
+            this.col = col;
+        }
+
+        public void clear() {
+
+            Graphics2D g2d = im.createGraphics();
+
+            g2d.setColor(Color.WHITE);
+            g2d.fillRect(0, 0, im.getWidth(null), im.getHeight(null));
+            g2d.dispose();
+            this.repaint();
+        }
+    }
     
-    
-    //Följande rader säkrar att GUI:et startar i EDT.
-    public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater( new Runnable() {
+    public static void main(String[] args ) {
+        
+        //Följande rader säkrar att GUI:et startar i EDT
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new MainGUI().setVisible(true);
             }
         });
     }
-    
+
 }

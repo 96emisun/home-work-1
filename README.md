@@ -53,3 +53,8 @@ Idag har jag försökt lägga till en sub-klass vid namn JumpingHorse och även
 städa upp lite i den abstrakta klassen. Just nu kan jag inte få mitt GUI att 
 fungera och det ska jag fortsätta med nästa gång så att jag kan få börja se lite
 framsteg medan de händer. Än så länge ser jag bara text på en skärm.
+
+- 2014-10-24 15:04
+Idag har jag fått GUIet att fungera. Nästa gång ska jag börja lägga till lite 
+knappar och även skriva lite mer i klasserna. Just nu har jag egentligen inget
+stort problem förutom att jag vill få knapparna på rätt ställe.
