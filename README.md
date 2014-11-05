@@ -58,3 +58,13 @@ framsteg medan de händer. Än så länge ser jag bara text på en skärm.
 Idag har jag fått GUIet att fungera. Nästa gång ska jag börja lägga till lite 
 knappar och även skriva lite mer i klasserna. Just nu har jag egentligen inget
 stort problem förutom att jag vill få knapparna på rätt ställe.
+
+- 2014-11-05 14:55
+Idag har jag sett till att allting i min kod är på samma språk (hade blandat
+svenska och engelska) och även fixat så att mina två knappar (starta och
+starta om) har rätt storlek. Ett problem just nu är att knapparna
+är aningen för långt ner vilket lämnar ett tomt utrymme i mitten och när jag gör 
+JFramen mindre så försvinner knapparna helt. Detta problem påverkar bara 
+programmets utseende, inte dess funktion. Därför lägger jag inte mer energi 
+på det just nu, jag vill fokusera på det som är viktigt så jag behåller 
+knapparna som de ser ut just nu.

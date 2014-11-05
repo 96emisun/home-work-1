@@ -1,6 +1,7 @@
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -10,32 +11,33 @@ import javax.swing.*;
 
 public class MainGUI extends JFrame{
 
-    private JMenuBar meny;
-    private JMenu arkiv;
-    private JMenu om;
-    private JMenuItem avsluta;
-    private JMenuItem omSkaparen;
-    private JMenuItem hjalp;
+    private JMenuBar menu;
+    private JMenu archive;
+    private JMenu about;
+    private JMenuItem exit;
+    private JMenuItem help;
     
-    private JButton starta;
+    private JButton start;
+    private JButton restart;
     
     protected Point pen;
     protected Point mouse;
     
     private DrawJPanel panel;
-    private Dimension btnDimension;
 
 
     public MainGUI(){
         
+        this.setLayout(new FlowLayout( 1, 5, 5) );
+        
         panel = new DrawJPanel();
         add(panel);
         
-        this.btnDimension = new Dimension(125, 30);
         
-        this.setTitle("DrawingGUI");
-        this.setSize( 600, 600 );
+        this.setTitle("Horse Race");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize( 600, 600 );
+        this.panel.setPreferredSize(new Dimension(600, 500));
         
         this.pen = new Point(0, 0);
         this.mouse = new Point(0, 0);
@@ -43,45 +45,35 @@ public class MainGUI extends JFrame{
          /*
             Skapar menyerna
         */
-        this.meny = new JMenuBar();
-        this.arkiv = new JMenu("Arkiv");
-        this.om = new JMenu("Om");
-        this.avsluta = new JMenuItem("Avsluta programmet");
-        this.omSkaparen = new JMenuItem("Om skaparen");
-        this.hjalp = new JMenuItem("Hjälp");
+        this.menu = new JMenuBar();
+        this.archive = new JMenu("Archive");
+        this.about = new JMenu("About");
+        this.exit = new JMenuItem("Exit program");
+        this.help = new JMenuItem("Help");
         
-        this.starta = new JButton("Starta");
-        this.starta.setPreferredSize(btnDimension);
+        this.start = new JButton("Start");
+        this.restart = new JButton("Restart");
         
-        this.setJMenuBar(meny);
-        this.meny.add(arkiv);
-        this.meny.add(om);
-        this.arkiv.add(avsluta);
-        this.om.add(omSkaparen);
-        this.om.add(hjalp);
+        this.setJMenuBar(menu);
+        this.menu.add(archive);
+        this.menu.add(about);
+        this.archive.add(exit);
+        this.about.add(help);
         
-        this.add(starta);
+        this.add(start);
+        this.add(restart);
         
-        this.avsluta.addActionListener(new ActionListener(){
+        this.exit.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 System.exit(0);
             }
         });
         
-        this.omSkaparen.addActionListener(new ActionListener(){
+        this.help.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                JOptionPane.showMessageDialog(null, 
-                        "Copyright: Emil Sundqvist\nSkapat för en inlämningsuppgift");
-            }
-        });
-        
-        this.hjalp.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                JOptionPane.showMessageDialog(null, 
-                        "HJÄLP!!!");
+                JOptionPane.showMessageDialog(null, "HELP!!!");
             }
         });
         
@@ -338,13 +330,15 @@ public class MainGUI extends JFrame{
     
     public static void main(String[] args ) {
         
-        //Följande rader säkrar att GUI:et startar i EDT
+        //Following lines ensure that the GUI starts in EDT
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 new MainGUI().setVisible(true);
             }
         });
+        
+        
     }
 
 }
