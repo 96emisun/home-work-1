@@ -19,13 +19,6 @@ public abstract class AbstractHorse{
     
     public abstract void forward();
     
-    /*public abstract void turnWest();
-    public abstract void turnEast();
-    public abstract void turnNorth();
-    public abstract void turnSouth();
-    public abstract void speedUp();
-    public abstract void speedDown();*/
-    
     public double getX(){
         return x;
     }

@@ -77,6 +77,23 @@ public class MainGUI extends JFrame{
             }
         });
         
+        this.start.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                
+                int y = 200;
+                int i = 0;
+                moveTo(0, 200);
+                
+                while(i <= 600){
+                    
+                    lineTo(i, 200);
+                    i++;
+                    delay(5);
+                }
+            }
+        });
+        
         
     }
 
