@@ -68,3 +68,10 @@ JFramen mindre så försvinner knapparna helt. Detta problem påverkar bara
 programmets utseende, inte dess funktion. Därför lägger jag inte mer energi 
 på det just nu, jag vill fokusera på det som är viktigt så jag behåller 
 knapparna som de ser ut just nu.
+
+- 2014-11-12 15:05
+Idag har jag börjat bygga på min modellklass där programmet ska köras. Jag har
+skapat en ArrayList som ska innnehålla alla hästar. Genom att lägga till en
+knapp för varje häst (t.ex. "Add Normal Horse") ska man kunna lägga till 
+valfritt antal hästar själv. En For-Each loop i modellklassen kollar varje hästs
+position för att kunna avbryta programmet när en häst har korsat mållinjen.

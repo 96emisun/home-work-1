@@ -1,4 +1,0 @@
-public class Subclass2{
-
-
-}

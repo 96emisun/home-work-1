@@ -23,10 +23,16 @@ public class MainGUI extends JFrame{
     protected Point pen;
     protected Point mouse;
     
+    protected Modelclass model;
+    
+    protected NormalHorse nHorse;
+    
     private DrawJPanel panel;
 
 
     public MainGUI(){
+        
+        //this.nHorse = new NormalHorse(0, 0, 0);
         
         this.setLayout(new FlowLayout( 1, 5, 5) );
         
@@ -81,16 +87,21 @@ public class MainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e){
                 
-                int y = 200;
-                int i = 0;
-                moveTo(0, 200);
+                model.startRace();
                 
+                //nHorse.forward();
+                
+                /*int i = 0;
+                moveTo(0, 200);
+
                 while(i <= 600){
-                    
+
                     lineTo(i, 200);
                     i++;
                     delay(5);
-                }
+                    
+                }*/
+                
             }
         });
         
