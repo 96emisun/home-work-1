@@ -31,7 +31,7 @@ public abstract class AbstractHorse{
         return startNbr;
     }
     public int getNbrOfSteps(){
-        return nbrOfSteps;
+        return 1;
     }
 }
 

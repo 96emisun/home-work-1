@@ -19,20 +19,23 @@ public class MainGUI extends JFrame{
     
     private JButton start;
     private JButton restart;
+    private JButton addHorse;
     
-    protected Point pen;
-    protected Point mouse;
+    private Point pen;
+    private Point mouse;
     
-    protected Modelclass model;
-    
-    protected NormalHorse nHorse;
+    private Modelclass model;
+    private AbstractHorse nHorse;
     
     private DrawJPanel panel;
 
+    public static MainGUI gui;
 
     public MainGUI(){
         
-        //this.nHorse = new NormalHorse(0, 0, 0);
+        this.gui = this;
+        
+        this.model = new Modelclass();
         
         this.setLayout(new FlowLayout( 1, 5, 5) );
         
@@ -59,6 +62,7 @@ public class MainGUI extends JFrame{
         
         this.start = new JButton("Start");
         this.restart = new JButton("Restart");
+        this.addHorse = new JButton("Add Horse");
         
         this.setJMenuBar(menu);
         this.menu.add(archive);
@@ -68,6 +72,9 @@ public class MainGUI extends JFrame{
         
         this.add(start);
         this.add(restart);
+        this.add(addHorse);
+        
+        model.drawStart(100, 50, 100, 300);
         
         this.exit.addActionListener(new ActionListener(){
             @Override
@@ -86,21 +93,19 @@ public class MainGUI extends JFrame{
         this.start.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                
+                if(gui == null){
+                    System.out.println("Tom");
+                }
                 model.startRace();
+            
+            }
+        });
+        
+        this.addHorse.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
                 
-                //nHorse.forward();
-                
-                /*int i = 0;
-                moveTo(0, 200);
-
-                while(i <= 600){
-
-                    lineTo(i, 200);
-                    i++;
-                    delay(5);
-                    
-                }*/
+                model.addNormalHorse();
                 
             }
         });
@@ -269,9 +274,9 @@ public class MainGUI extends JFrame{
     
     private class DrawJPanel extends JPanel {
 
-        protected Color col;
-        protected float strokeWidth;
-        protected BufferedImage im;
+        private Color col;
+        private float strokeWidth;
+        private BufferedImage im;
 
         public DrawJPanel() {
             super();

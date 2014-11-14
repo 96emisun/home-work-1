@@ -75,3 +75,10 @@ skapat en ArrayList som ska innnehålla alla hästar. Genom att lägga till en
 knapp för varje häst (t.ex. "Add Normal Horse") ska man kunna lägga till 
 valfritt antal hästar själv. En For-Each loop i modellklassen kollar varje hästs
 position för att kunna avbryta programmet när en häst har korsat mållinjen.
+
+- 2014-11-14 15:18
+Idag har jag och Stefan konstaterat att det var mycket svårare att lägga till
+hästarna till en ArrayList än vad det borde vara (med andra ord så fick vi det 
+ej att fungera). Jag ska i stället fokusera på att fixa till alla klasser
+ungefär som de ska vara så ska jag sedan hårdkoda in hästarna om jag inte
+lyckas lägga till dem.
