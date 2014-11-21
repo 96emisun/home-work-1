@@ -1,10 +1,10 @@
 package HorseRace;
 
+import java.util.Random;
+
 /**
  * @author Emil Sundvist
  */
-import java.util.Random;
-
 public class NormalHorse extends AbstractHorse {
 
     private int x;

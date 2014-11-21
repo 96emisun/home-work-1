@@ -15,8 +15,8 @@ Arbetsgång:
         - Till nästa gång
 - [X] Readme-filen
      - Fyll i under rubrikerna nedan.
-- [ ] När projektet är färdigt gör en sista push till din användare.
-- [ ] Sista steget är att göra en pull-request till den här repo:n. Se till att göra den till din branch.
+- [X] När projektet är färdigt gör en sista push till din användare.
+- [X] Sista steget är att göra en pull-request till den här repo:n. Se till att göra den till din branch.
 
 
 ---
@@ -24,7 +24,7 @@ Arbetsgång:
 
 Inledning
 ---
-Jag har fått i uppgift att skriva ett program där man kan tävla flera hästar mot
+Jag har valt att skriva ett program där man kan tävla flera hästar mot
 varandra. Det finns vissa krav på de klasser som ska finnas med (t.ex. en
 abstrakt klass och minst 2 st subklasser) och även på vissa andra saker
 (t.ex. Comparable). Programmet ska köras via ett GUI som jag har skrivit själv.
@@ -71,6 +71,9 @@ Programmet kan inte köras i realtid på grund av hur trådar fungerar tillsamma
 med ActionPerformed, därför ritas inte hästarnas framsteg ut föränn efter att
 tävlingen är slutförd. Utöver det har jag inte stött på några buggar.
 
+Om JumpingHorse hoppar när den passerar mållinjen kan det se ut som att den
+aldrig passerar mål på grund av att ingenting ritas ut medan den är "i luften".
+
 - Förbättringar  
 Först och främst hade det varit bra om programmet hade kunnat köras i realtid,
 sättet det körs på just nu drar ner helhetsintrycket. Det hade även varit bra
@@ -79,6 +82,8 @@ på grund av jag inte lyckades få ArrayList att fungera så hårdkodade jag in 
 hästar för att kunna lämna in ett fungerande program.
 
 - Övrigt  
+I klassdiagrammet lade jag inte in alla metoder pga att väldigt många metoder
+kommer från EventWindow och det skulle då bli väldigt mycket jobb.
 
 LOG
 ---
@@ -138,3 +143,6 @@ kommentera min kod, när jag har kommenterat ska jag skapa klassdiagrammet.
 - 2014-11-18 18:25  
 Nu är jag i stort sett färdig med kommenteringen. Det enda som återstår är att
 skapa klassdiagrammet som ska lämnas in tillsammans med uppgiften.
+
+- 2014-11-18 15:58  
+Nu har jag gjort det sista som ska göras och lämnar nu in uppgiften.

@@ -3,7 +3,6 @@ package HorseRace;
 /**
  * @author Emil Sundqvist
  */
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,7 +15,10 @@ import java.awt.image.BufferedImage;
 import javax.swing.*;
 
 public class MainGUI extends JFrame{
-
+    
+    /*
+    The different components used in the GUI are created here
+    */
     private final JMenuBar menu;
     private final JMenu archive;
     private final JMenu about;
@@ -29,8 +31,6 @@ public class MainGUI extends JFrame{
     private final Point mouse;
     
     private Race race;
-    private AbstractHorse nHorse;
-    private RaceResults res;
     
     private final DrawJPanel panel;
 
@@ -38,6 +38,10 @@ public class MainGUI extends JFrame{
 
     public MainGUI(){
         
+        /*
+        This variable points to itself so that we can access it from other
+        classes
+        */
         this.gui = this;
         
         this.race = new Race();
@@ -75,6 +79,9 @@ public class MainGUI extends JFrame{
         
         this.add(btnStart);
         
+        /*
+        Draws the start and finish lines, then adds the horses
+        */
         race.drawStartLine(100, 50, 350);
         race.drawFinishLine(500, 50, 350);
         race.addHorses();
