@@ -42,7 +42,7 @@ hästarna mot varandra så många gånger man vill. Efter varje slutförd omgån
 gånger den hästen har vunnit. 
 
 För att ge programmet lite variation finns det två
-olika hässtyper. NormalHorse, som går ett slumpmässigt antal steg varje gång
+olika hästtyper. NormalHorse, som går ett slumpmässigt antal steg varje gång
 och inte har några övriga funktioner, och JumpingHorse, som inte kan rulla lika
 höga tal som NormalHorse, men för att kompensera för den svagheten kommer
 hästen att göra ett långt hopp när den rullar ett speciellt tal.
